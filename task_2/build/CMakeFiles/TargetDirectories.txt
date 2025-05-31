@@ -1,0 +1,3 @@
+/home/shesh/Devs/C++/test/threads/task_2/build/CMakeFiles/ConcurrentList.dir
+/home/shesh/Devs/C++/test/threads/task_2/build/CMakeFiles/edit_cache.dir
+/home/shesh/Devs/C++/test/threads/task_2/build/CMakeFiles/rebuild_cache.dir

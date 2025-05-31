@@ -1,0 +1,1 @@
+/sbin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/DeterminantCalculator.dir/link.d CMakeFiles/DeterminantCalculator.dir/Determinant.cpp.o CMakeFiles/DeterminantCalculator.dir/Matrix.cpp.o CMakeFiles/DeterminantCalculator.dir/Test.cpp.o CMakeFiles/DeterminantCalculator.dir/main.cpp.o -o DeterminantCalculator

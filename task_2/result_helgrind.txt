@@ -1,0 +1,140 @@
+==8627== Helgrind, a thread error detector
+==8627== Copyright (C) 2007-2024, and GNU GPL'd, by OpenWorks LLP et al.
+==8627== Using Valgrind-3.25.1 and LibVEX; rerun with -h for copyright info
+==8627== Command: ./ConcurrentList
+==8627== 
+==8627== ---Thread-Announcement------------------------------------------
+==8627== 
+==8627== Thread #3 was created
+==8627==    at 0x4D6BFA3: clone (clone.S:76)
+==8627==    by 0x4D6C100: __clone_internal_fallback (clone-internal.c:64)
+==8627==    by 0x4D6C100: __clone_internal (clone-internal.c:109)
+==8627==    by 0x4CE836D: create_thread (pthread_create.c:298)
+==8627==    by 0x4CE9019: pthread_create@@GLIBC_2.34 (pthread_create.c:841)
+==8627==    by 0x48602C3: pthread_create_WRK (hg_intercepts.c:449)
+==8627==    by 0x497F2A1: __gthread_create (gthr-default.h:709)
+==8627==    by 0x497F2A1: std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)()) (thread.cc:172)
+==8627==    by 0x4005B5C: thread<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (std_thread.h:175)
+==8627==    by 0x4005B5C: construct<std::thread, benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (new_allocator.h:191)
+==8627==    by 0x4005B5C: construct<std::thread, benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (alloc_traits.h:674)
+==8627==    by 0x4005B5C: _M_realloc_append<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (vector.tcc:586)
+==8627==    by 0x4005B5C: emplace_back<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (vector.tcc:123)
+==8627==    by 0x4005B5C: benchmark_list (Test.cpp:19)
+==8627==    by 0x4005B5C: test_naive_list (Test.cpp:58)
+==8627==    by 0x4005B5C: run_all_tests() (Test.cpp:80)
+==8627==    by 0x4002B88: main (main.cpp:4)
+==8627== 
+==8627== ---Thread-Announcement------------------------------------------
+==8627== 
+==8627== Thread #2 was created
+==8627==    at 0x4D6BFA3: clone (clone.S:76)
+==8627==    by 0x4D6C100: __clone_internal_fallback (clone-internal.c:64)
+==8627==    by 0x4D6C100: __clone_internal (clone-internal.c:109)
+==8627==    by 0x4CE836D: create_thread (pthread_create.c:298)
+==8627==    by 0x4CE9019: pthread_create@@GLIBC_2.34 (pthread_create.c:841)
+==8627==    by 0x48602C3: pthread_create_WRK (hg_intercepts.c:449)
+==8627==    by 0x497F2A1: __gthread_create (gthr-default.h:709)
+==8627==    by 0x497F2A1: std::thread::_M_start_thread(std::unique_ptr<std::thread::_State, std::default_delete<std::thread::_State> >, void (*)()) (thread.cc:172)
+==8627==    by 0x4005B5C: thread<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (std_thread.h:175)
+==8627==    by 0x4005B5C: construct<std::thread, benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (new_allocator.h:191)
+==8627==    by 0x4005B5C: construct<std::thread, benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (alloc_traits.h:674)
+==8627==    by 0x4005B5C: _M_realloc_append<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (vector.tcc:586)
+==8627==    by 0x4005B5C: emplace_back<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (vector.tcc:123)
+==8627==    by 0x4005B5C: benchmark_list (Test.cpp:19)
+==8627==    by 0x4005B5C: test_naive_list (Test.cpp:58)
+==8627==    by 0x4005B5C: run_all_tests() (Test.cpp:80)
+==8627==    by 0x4002B88: main (main.cpp:4)
+==8627== 
+==8627== ---Thread-Announcement------------------------------------------
+==8627== 
+==8627== Thread #1 is the program's root thread
+==8627== 
+==8627== ----------------------------------------------------------------
+==8627== 
+==8627== Possible data race during read of size 4 at 0x4E5B140 by thread #3
+==8627== Locks held: none
+==8627==    at 0x4004347: NaiveList::transform() (ConcurrentList.cpp:62)
+==8627==    by 0x4004A6C: operator() (Test.cpp:22)
+==8627==    by 0x4004A6C: __invoke_impl<void, benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (invoke.h:63)
+==8627==    by 0x4004A6C: __invoke<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (invoke.h:98)
+==8627==    by 0x4004A6C: _M_invoke<0> (std_thread.h:303)
+==8627==    by 0x4004A6C: operator() (std_thread.h:310)
+==8627==    by 0x4004A6C: std::thread::_State_impl<std::thread::_Invoker<std::tuple<benchmark_list(ConcurrentList*, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)::{lambda()#1}> > >::_M_run() (std_thread.h:255)
+==8627==    by 0x497F1A3: execute_native_thread_routine (thread.cc:104)
+==8627==    by 0x48604CB: mythread_wrapper (hg_intercepts.c:410)
+==8627==    by 0x4CE87EA: start_thread (pthread_create.c:448)
+==8627==    by 0x4D6BFB3: clone (clone.S:100)
+==8627== 
+==8627== This conflicts with a previous write of size 4 by thread #2
+==8627== Locks held: none
+==8627==    at 0x4004367: NaiveList::transform() (ConcurrentList.cpp:66)
+==8627==    by 0x4004A6C: operator() (Test.cpp:22)
+==8627==    by 0x4004A6C: __invoke_impl<void, benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (invoke.h:63)
+==8627==    by 0x4004A6C: __invoke<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (invoke.h:98)
+==8627==    by 0x4004A6C: _M_invoke<0> (std_thread.h:303)
+==8627==    by 0x4004A6C: operator() (std_thread.h:310)
+==8627==    by 0x4004A6C: std::thread::_State_impl<std::thread::_Invoker<std::tuple<benchmark_list(ConcurrentList*, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)::{lambda()#1}> > >::_M_run() (std_thread.h:255)
+==8627==    by 0x497F1A3: execute_native_thread_routine (thread.cc:104)
+==8627==    by 0x48604CB: mythread_wrapper (hg_intercepts.c:410)
+==8627==    by 0x4CE87EA: start_thread (pthread_create.c:448)
+==8627==    by 0x4D6BFB3: clone (clone.S:100)
+==8627==  Address 0x4e5b140 is 0 bytes inside a block of size 32 alloc'd
+==8627==    at 0x4854093: operator new(unsigned long) (vg_replace_malloc.c:487)
+==8627==    by 0x4005889: allocate (new_allocator.h:151)
+==8627==    by 0x4005889: allocate (alloc_traits.h:614)
+==8627==    by 0x4005889: _M_allocate (stl_vector.h:387)
+==8627==    by 0x4005889: _M_create_storage (stl_vector.h:405)
+==8627==    by 0x4005889: _Vector_base (stl_vector.h:341)
+==8627==    by 0x4005889: vector (stl_vector.h:633)
+==8627==    by 0x4005889: test_naive_list (Test.cpp:57)
+==8627==    by 0x4005889: run_all_tests() (Test.cpp:80)
+==8627==    by 0x4002B88: main (main.cpp:4)
+==8627==  Block was alloc'd by thread #1
+==8627== 
+==8627== ----------------------------------------------------------------
+==8627== 
+==8627== Possible data race during write of size 4 at 0x4E5B140 by thread #3
+==8627== Locks held: none
+==8627==    at 0x4004367: NaiveList::transform() (ConcurrentList.cpp:66)
+==8627==    by 0x4004A6C: operator() (Test.cpp:22)
+==8627==    by 0x4004A6C: __invoke_impl<void, benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (invoke.h:63)
+==8627==    by 0x4004A6C: __invoke<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (invoke.h:98)
+==8627==    by 0x4004A6C: _M_invoke<0> (std_thread.h:303)
+==8627==    by 0x4004A6C: operator() (std_thread.h:310)
+==8627==    by 0x4004A6C: std::thread::_State_impl<std::thread::_Invoker<std::tuple<benchmark_list(ConcurrentList*, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)::{lambda()#1}> > >::_M_run() (std_thread.h:255)
+==8627==    by 0x497F1A3: execute_native_thread_routine (thread.cc:104)
+==8627==    by 0x48604CB: mythread_wrapper (hg_intercepts.c:410)
+==8627==    by 0x4CE87EA: start_thread (pthread_create.c:448)
+==8627==    by 0x4D6BFB3: clone (clone.S:100)
+==8627== 
+==8627== This conflicts with a previous write of size 4 by thread #2
+==8627== Locks held: none
+==8627==    at 0x4004367: NaiveList::transform() (ConcurrentList.cpp:66)
+==8627==    by 0x4004A6C: operator() (Test.cpp:22)
+==8627==    by 0x4004A6C: __invoke_impl<void, benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (invoke.h:63)
+==8627==    by 0x4004A6C: __invoke<benchmark_list(ConcurrentList*, int, const std::string&)::<lambda()> > (invoke.h:98)
+==8627==    by 0x4004A6C: _M_invoke<0> (std_thread.h:303)
+==8627==    by 0x4004A6C: operator() (std_thread.h:310)
+==8627==    by 0x4004A6C: std::thread::_State_impl<std::thread::_Invoker<std::tuple<benchmark_list(ConcurrentList*, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)::{lambda()#1}> > >::_M_run() (std_thread.h:255)
+==8627==    by 0x497F1A3: execute_native_thread_routine (thread.cc:104)
+==8627==    by 0x48604CB: mythread_wrapper (hg_intercepts.c:410)
+==8627==    by 0x4CE87EA: start_thread (pthread_create.c:448)
+==8627==    by 0x4D6BFB3: clone (clone.S:100)
+==8627==  Address 0x4e5b140 is 0 bytes inside a block of size 32 alloc'd
+==8627==    at 0x4854093: operator new(unsigned long) (vg_replace_malloc.c:487)
+==8627==    by 0x4005889: allocate (new_allocator.h:151)
+==8627==    by 0x4005889: allocate (alloc_traits.h:614)
+==8627==    by 0x4005889: _M_allocate (stl_vector.h:387)
+==8627==    by 0x4005889: _M_create_storage (stl_vector.h:405)
+==8627==    by 0x4005889: _Vector_base (stl_vector.h:341)
+==8627==    by 0x4005889: vector (stl_vector.h:633)
+==8627==    by 0x4005889: test_naive_list (Test.cpp:57)
+==8627==    by 0x4005889: run_all_tests() (Test.cpp:80)
+==8627==    by 0x4002B88: main (main.cpp:4)
+==8627==  Block was alloc'd by thread #1
+==8627== 
+==8627== 
+==8627== Use --history-level=approx or =none to gain increased speed, at
+==8627== the cost of reduced accuracy of conflicting-access information
+==8627== For lists of detected and suppressed errors, rerun with: -s
+==8627== ERROR SUMMARY: 20800 errors from 2 contexts (suppressed: 8 from 2)
